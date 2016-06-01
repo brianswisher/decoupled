@@ -1,0 +1,37 @@
+{
+  "name": "decoupled",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/bundle.js",
+  "scripts": {
+    "build": "npm run rwb -- static && npm run change",
+    "change": "npm run change:html && npm run change:js",
+    "change:html": "npm run change:html:id && npm run change:html:noscript",
+    "change:html:id": "perl -pi -e 's/.react-root/decoupled-container/g' ./dist/index.html",
+    "change:html:noscript": "perl -pi -e 's/.noscript.+pt.//g' ./dist/index.html",
+    "change:js": "perl -pi -e 's/.react-root/decoupled-container/g' ./dist/bundle.js",
+    "rwb": "./node_modules/.bin/rwb",
+    "start": "rwb serve",
+    "start:static": "npm run build && http-server ./dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "redux": "^3.5.2"
+  },
+  "devDependencies": {
+    "http-server": "^0.9.0",
+    "react-router": "^2.4.1",
+    "rwb": "git+https://github.com/meyer/rwb#update-deps"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [
+    "react"
+  ],
+  "react": {
+    "routes": "./routes.js",
+    "rwb": "0.0.21"
+  }
+}
