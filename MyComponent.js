@@ -40,11 +40,6 @@ var Decoupled = React.createClass({
   componentDidMount: function() {
     this.state.store.subscribe(this.update);
 
-    if (typeof window === 'object') {
-      window[this.props.namespace].handleIncrement = this.handleIncrement;
-      window[this.props.namespace].handleDecrement = this.handleDecrement;
-    }
-
     this.update();
   },
 
@@ -54,19 +49,23 @@ var Decoupled = React.createClass({
     });
   },
 
-  handleIncrement: function(){
-    this.state.store.dispatch({ type: 'INCREMENT' });
-  },
-
   handleDecrement: function(){
     this.state.store.dispatch({ type: 'DECREMENT' });
   },
 
+  handleIncrement: function(){
+    this.state.store.dispatch({ type: 'INCREMENT' });
+  },
+
   render: function() {
     return (
-      <Heading>
-        {this.state.store.getState()}
-      </Heading>
+      <div>
+        <Heading>
+          {this.state.store.getState()}
+        </Heading>
+        <button onClick={this.handleDecrement}>-</button>
+        <button onClick={this.handleIncrement}>+</button>
+      </div>
     );
   },
 });
@@ -82,8 +81,6 @@ var MyComponent = React.createClass({
 
   render: function() {
     if (typeof window === 'object') {
-      window[PACKAGE.name] = {};
-
       return (
         <div id={PACKAGE.name}>loading...</div>
       );
@@ -97,7 +94,7 @@ var MyComponent = React.createClass({
 
 function render(target) {
   ReactDom.render(
-    <Decoupled className={styles.MyComponent} namespace={PACKAGE.name}/>,
+    <Decoupled className={styles.MyComponent}/>,
     target,
     function(){}
   );
