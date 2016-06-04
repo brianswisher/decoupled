@@ -60,6 +60,7 @@ var Decoupled = React.createClass({
   render: function() {
     return (
       <div>
+        <h2>{PACKAGE.name}</h2>
         <Heading>
           {this.state.store.getState()}
         </Heading>

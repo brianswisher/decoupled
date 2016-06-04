@@ -1,5 +1,5 @@
 {
-  "name": "decoupled",
+  "name": "brand-intelligence",
   "version": "1.0.0",
   "description": "",
   "main": "dist/bundle.js",
@@ -7,9 +7,9 @@
     "build": "npm run rwb -- static && npm run change",
     "change": "npm run change:html && npm run change:js",
     "change:html": "npm run change:html:id && npm run change:html:noscript",
-    "change:html:id": "perl -pi -e 's/.react-root/decoupled-container/g' ./dist/index.html",
+    "change:html:id": "perl -pi -e 's/.react-root/brand-intelligence-container/g' ./dist/index.html",
     "change:html:noscript": "perl -pi -e 's/.noscript.+pt.//g' ./dist/index.html",
-    "change:js": "perl -pi -e 's/.react-root/decoupled-container/g' ./dist/bundle.js",
+    "change:js": "perl -pi -e 's/.react-root/brand-intelligence-container/g' ./dist/bundle.js",
     "rwb": "./node_modules/.bin/rwb",
     "start": "rwb serve",
     "start:static": "npm run build && http-server ./dist",
